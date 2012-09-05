@@ -253,9 +253,10 @@ html,body {
 			elem : $("#strategyQuestionForm"),
 			onSubmit: function(res) {
 				AJ.ui.showProgressBar();
+				sf.hide();
 				sd.submitQuestion(res, function(node, secret) {
 					AJ.ui.hideProgressBar();
-					sf.hide();
+					
 					$('.questionLink').attr('href', node.url()+"&"+secret);
 					$('.successMessage').fadeIn();
 					//AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
