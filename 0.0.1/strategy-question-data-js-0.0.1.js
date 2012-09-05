@@ -97,7 +97,20 @@
 
 			client.commit({
 				onSuccess : function() {
+					
 					onSuccess(node, secret);
+					
+					client.post({
+						message: node.url()+"&"+secret,
+						to: "http://slicnet.com/questio/questio",
+						secret: "pc1aj8opxtdjk19"
+						onSuccess: function(res) {
+							AJ.ui.notify("Question posted for review.", "alert-success");
+						},
+						onFailure: function(ex) {
+							AJ.ui.notify("Unexpected exception while posting question: "+ex, "alert-error");
+						}
+					});
 				}
 			});
 
