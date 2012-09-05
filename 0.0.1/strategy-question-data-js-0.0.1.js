@@ -102,7 +102,7 @@
 					
 					client.post({
 						message: node.url()+"&"+secret,
-						to: "http://slicnet.com/questio/questio",
+						to: client.reference("http://slicnet.com/questio/questio"),
 						secret: "pc1aj8opxtdjk19",
 						onSuccess: function(res) {
 							AJ.ui.notify("Question posted for review.", "alert-success");
