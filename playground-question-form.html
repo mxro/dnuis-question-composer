@@ -38,27 +38,38 @@
 			var qf = {};
 			
 			var elem = params.elem;
-
+			qf.onSubmit = params.onSubmit;
+			
 			qf.submit = function() {
+				
+				
+				
 				var inputs = {
-					brandName : $('.brandName').val(),
-					imageLink : $('.imageLink').val(),
-					justification: $('.justification').val()
+					brandName : $('.brandName', elem).val(),
+					imageLink : $('.imageLink', elem).val(),
+					justification: $('.justification', elem).val(),
+					correctStrategy: $('input[name=optionsRadios]:checked', elem).val()
 				};
 				
 				// validate inputs
-				if (!brandName) {
+				if (!inputs.brandName) {
 					alert("Please provide a brand name!");
 					return;
 				}
 				
-				if (!justication) {
+				if (!inputs.justification) {
 					alert("Please provide a justification!");
 					return;
 				}
-				
+
+				qf.onSubmit(inputs);
 			};
 			
+			qf.show = function(onSubmit) {
+				if (onSubmit) {
+					qf.onSubmit = onSubmit;
+				}
+			};
 			
 			$('.moreInfos', elem).popover();
 
@@ -77,7 +88,10 @@
 
 	window.onload = function() {
 		$.initStrategyQuestionForm({
-			elem : $("#strategyQuestionForm")
+			elem : $("#strategyQuestionForm"),
+			onSubmit: function(res) {
+				alert(JSON.stringify(res));
+			}
 		});
 	};
 </script>
@@ -139,14 +153,14 @@
 								<table class="table table-bordered">
 									<tr>
 										<td><label class="radio"> <input type="radio"
-												name="optionsRadios" id="optionsRadios1" value="option1"
+												name="optionsRadios" id="optionsRadios1" value="costLeadership"
 												checked> Cost Leadership <a href="#"
 												class="moreInfos" rel="popover" data-placement="right"
 												data-content="The cost leadership strategy is targeted to provide a broad market with low-cost products. <img src='cost_leadership.PNG'> "
 												data-original-title="Cost Leadership Strategy">More Info</a>
 										</label></td>
 										<td><label class="radio"> <input type="radio"
-												name="optionsRadios" id="optionsRadios2" value="option2">
+												name="optionsRadios" id="optionsRadios2" value="differentiation">
 												Differentiation <a href="#" class="moreInfos" rel="popover"
 												data-placement="left"
 												data-content="The differentiation strategy is targeted to provide a broad market with high-cost products."
@@ -155,7 +169,7 @@
 									</tr>
 									<tr>
 										<td><label class="radio"> <input type="radio"
-												name="optionsRadios" id="optionsRadios3" value="option3">
+												name="optionsRadios" id="optionsRadios3" value="focusedLowCost">
 												Focused Low Cost <a href="#" class="moreInfos" rel="popover"
 												data-placement="right"
 												data-content="The focused low cost strategy is targeted to provide a small market with low-cost products."
@@ -163,7 +177,7 @@
 													Info</a>
 										</label></td>
 										<td><label class="radio"> <input type="radio"
-												name="optionsRadios" id="optionsRadios4" value="option4">
+												name="optionsRadios" id="optionsRadios4" value="focusedHighCost">
 												Focused High Cost <a href="#" class="moreInfos"
 												rel="popover" data-placement="left"
 												data-content="The focused high cost strategy is targeted to provide a small market with high-cost products."
