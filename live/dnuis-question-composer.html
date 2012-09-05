@@ -96,7 +96,23 @@ html,body {
 						<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-form-html-0.0.1") -->
 					</div>
 
-
+					<div class="successMessage hero-unit" style="display: none;">
+						<h1>Awesome!</h1>
+						<p>Your question has been submitted and will show up in the
+							game once it has been reviewed.</p>
+						<p>You can see and edit your question under the following
+							link:</p>
+						<blockquote>
+							<p>
+								<a class="questionLink" href="#">Your Question Link (right click and select copy
+									link to save)</a>
+							</p>
+						</blockquote>
+						<p>
+							<a class="contributeAnotherQuestionButton btn btn-success btn-large"> Great, let me
+								contribute another question! </a>
+						</p>
+					</div>
 				</div>
 
 
@@ -229,22 +245,36 @@ html,body {
 		//AJ.navbar = $.ajInitNavbar($("#ajnavbar"), aj);
 		AJ.progressBar=$.ajInitProgressBar($("#ajprogressbar"));
 		
-		sf = $.initStrategyQuestionForm({
-			elem : $("#strategyQuestionForm")
-			
-		});
-		
-		
 		var client = aj.createClient();
 		
 		sd = $.initStrategyQuestionData({client: client});
 		
-		sf.show(function(res) {
-			AJ.ui.showProgressBar();
-			sd.submitQuestion(res, function(node, secret) {
-				AJ.ui.hideProgressBar();
-				AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
-			});
+		sf = $.initStrategyQuestionForm({
+			elem : $("#strategyQuestionForm"),
+			onSubmit: function(res) {
+				AJ.ui.showProgressBar();
+				sd.submitQuestion(res, function(node, secret) {
+					AJ.ui.hideProgressBar();
+					sf.hide();
+					$('.questionLink').attr('href', +node.url()+"&"+secret);
+					$('.successMessage').fadeIn();
+					//AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
+				});
+			}
+		});
+		
+		
+		
+		
+		
+		
+		sf.show();
+		
+		$('.contributeAnotherQuestionButton').click(function(evt) {
+			evt.preventDefault();
+			
+			$('.successMessage').hide();
+			sf.show();
 		});
 		
 	}

@@ -36,6 +36,13 @@
 				if (onSubmit) {
 					qf.onSubmit = onSubmit;
 				}
+				$('.brandName', elem).val("");
+				$('.imageLink', elem).val("");
+				$('.justification', elem).val("");
+			};
+			
+			qf.hide = function() {
+				elem.hide();
 			};
 			
 			$('.moreInfos', elem).popover();
@@ -48,8 +55,8 @@
 			
 			return {
 				show: qf.show,
-				submit: qf.submit
-				
+				submit: qf.submit,
+				hide: qf.hide
 			};
 		};
 
