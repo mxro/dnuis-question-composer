@@ -201,15 +201,19 @@ html,body {
 
 	</script>
 
+<script>
+// 
+<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-data-js-0.0.1") -->
+// 
+</script>
+
 	<script>
 
 
-
+	var sf = null;
+	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
-
-		var client = aj.createClient();
-		
 		
 		
 	}
@@ -221,11 +225,19 @@ html,body {
 		//AJ.navbar = $.ajInitNavbar($("#ajnavbar"), aj);
 		AJ.progressBar=$.ajInitProgressBar($("#ajprogressbar"));
 		
+		var client = aj.createClient();
+		
+		sf.show(function(res) {
+			
+		});
 		
 	}
 
 	window.onload = function() {
-
+		sf = $.initStrategyQuestionForm({
+			elem : $("#strategyQuestionForm")
+			
+		});
 	}
 </script>
 

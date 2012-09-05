@@ -10,9 +10,7 @@
 			qf.onSubmit = params.onSubmit;
 			
 			qf.submit = function() {
-				
-				
-				
+
 				var inputs = {
 					brandName : $('.brandName', elem).val(),
 					imageLink : $('.imageLink', elem).val(),
