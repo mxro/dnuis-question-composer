@@ -68,7 +68,7 @@ html,body {
 	<div class="wrapper">
 
 		<div class="container-fluid">
-			<div id="ajnavbar" style="display:none">
+			<div id="ajnavbar" style="display: none">
 				<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/ajMicroSync/docs/aj-navbar-html-0.0.2") -->
 			</div>
 
@@ -110,10 +110,7 @@ html,body {
 		<div class="push"></div>
 	</div>
 
-	<div class='footer'>
-		
-
-	</div>
+	<div class='footer'></div>
 
 	<script type="text/javascript" language="javascript"
 		src="http://appjangle.com/js/v01/onejs/onejs.nocache.js"></script>
@@ -201,7 +198,7 @@ html,body {
 
 	</script>
 
-<script>
+	<script>
 // 
 <!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-data-js-0.0.1") -->
 // 
@@ -211,6 +208,7 @@ html,body {
 
 
 	var sf = null;
+	var sd = null;
 	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
@@ -227,8 +225,14 @@ html,body {
 		
 		var client = aj.createClient();
 		
+		sd = $.initStrategyQuestionData({client: client});
+		
 		sf.show(function(res) {
-			
+			AJ.ui.showProgressBar();
+			sd.submitQuestion(res, function(node, secret) {
+				AJ.ui.hideProgressBar();
+				AJ.ui.notify("Question uploaded successfully: "+node+" "+secret);
+			});
 		});
 		
 	}
@@ -238,6 +242,8 @@ html,body {
 			elem : $("#strategyQuestionForm")
 			
 		});
+		
+		
 	}
 </script>
 

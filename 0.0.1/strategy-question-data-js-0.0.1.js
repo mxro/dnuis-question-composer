@@ -2,18 +2,24 @@
 
 (function($, AJ) {
 
+	// constants ------
+	var aStrategyQuestion = client
+			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Strategy_Quadrant_Questi");
+	var aBrandName = client
+			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Name");
+	var aBrandImage = client
+			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Image");
+	var aCorrectStrategy = client
+			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
+	
+	
 	$.initStrategyQuestionData = function(params) {
 
 		// final parameters
 		var client = params.client;
 
-		// constants
-		var aStrategyQuestion = client
-				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Strategy_Quadrant_Questi");
-		var aBrandName = client.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Name");
-		var aBrandImage = client.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Image");
-		var aCorrectStrategy = client.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
 		
+
 		var qd = {};
 
 		qd.submitQuestion = function(data, onSuccess) {
@@ -33,8 +39,8 @@
 						atAddress : "./q",
 						to : res.seedNode,
 						onSuccess : function(ar) {
-							qd.priv.writeQuestionDataToNode(ar.appendedNode, res.secret,
-									data, onSuccess);
+							qd.priv.writeQuestionDataToNode(ar.appendedNode,
+									res.secret, data, onSuccess);
 						},
 						onFailure : function(ex) {
 							AJ.ui.notify(ex, "alert-error");
@@ -48,52 +54,52 @@
 			});
 		};
 
-		qd.priv.writeQuestionDataToNode = function(node, secret, data, onSuccess) {
+		qd.priv.writeQuestionDataToNode = function(node, secret, data,
+				onSuccess) {
 			client.append({
 				node : aStrategyQuestion,
 				to : node
 			});
-			
+
 			var brandName = client.append({
-				node: data.brandName,
-				to: node,
-				atAddress: "./brandName"
+				node : data.brandName,
+				to : node,
+				atAddress : "./brandName"
 			});
-			
+
 			client.append({
-				node: aBrandName,
-				to: brandName
+				node : aBrandName,
+				to : brandName
 			});
-			
+
 			var imageLink = client.append({
-				node: data.imageLink,
-				to: node,
-				atAddress: "./brandImageLink"
+				node : data.imageLink,
+				to : node,
+				atAddress : "./brandImageLink"
 			});
-			
+
 			client.append({
-				node: aBrandImage,
-				to: imageLink
+				node : aBrandImage,
+				to : imageLink
 			});
-			
+
 			var correctStrategy = client.append({
-				node: data.correctStrategy,
-				to: node,
-				atAddress: "./correctStrategy"
+				node : data.correctStrategy,
+				to : node,
+				atAddress : "./correctStrategy"
 			});
-			
-			
+
 			client.append({
-				node: aCorrectStrategy,
-				to: correctStrategy
+				node : aCorrectStrategy,
+				to : correctStrategy
 			});
 
 			client.commit({
-				onSuccess: function() {
+				onSuccess : function() {
 					onSuccess(node, secret);
 				}
 			});
-			
+
 		};
 
 		return {
