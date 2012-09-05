@@ -3,8 +3,6 @@
 (function($, AJ) {
 
 	
-	
-	
 	$.initStrategyQuestionData = function(params) {
 
 		// final parameters
@@ -54,6 +52,9 @@
 			});
 		};
 
+		/**
+		 * Write to a node all the data defining a strategy quadrant question. 
+		 */
 		qd.priv.writeQuestionDataToNode = function(node, secret, data,
 				onSuccess) {
 			client.append({
