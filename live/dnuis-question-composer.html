@@ -242,15 +242,21 @@ html,body {
 	}
 
 	// Use the Google Loader script to load the google.picker script.
-    google.setOnLoadCallback(createPicker);
+    //google.setOnLoadCallback(createPicker);
     google.load('picker', '1');
 
     // Create and render a Picker object for searching images.
     function createPicker() {
         var picker = new google.picker.PickerBuilder().
-            addView(google.picker.ViewId.IMAGE_SEARCH).
+            addView(
+            		new google.picker.ImageSearchView()
+            		.setLicense("none")
+            		.setSize(google.picker.ImageSearchView.Size.SIZE_QSVGA)).
+            addView(new google.picker.DocsUploadView()).
+            addView(new google.picker.PhotosView())
             setCallback(pickerCallback).
             build();
+        
         picker.setVisible(true);
     }
 
