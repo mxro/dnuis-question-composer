@@ -145,7 +145,10 @@ html,body {
 	<script
 		src="http://appjangle.com/assets/v02/bootstrap-2.1.0/js/bootstrap.min.js"></script>
 
-
+	
+	<!--  for google picker -->
+	 <script src="http://www.google.com/jsapi"></script>
+	
 
 	<script>
 // 
@@ -238,8 +241,38 @@ html,body {
 		
 	}
 
+	// Use the Google Loader script to load the google.picker script.
+    google.setOnLoadCallback(createPicker);
+    google.load('picker', '1');
+
+    // Create and render a Picker object for searching images.
+    function createPicker() {
+        var picker = new google.picker.PickerBuilder().
+            addView(google.picker.ViewId.IMAGE_SEARCH).
+            setCallback(pickerCallback).
+            build();
+        picker.setVisible(true);
+    }
+
+    // A simple callback implementation.
+    function pickerCallback(data) {
+      var url = 'nothing';
+      if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+        var doc = data[google.picker.Response.DOCUMENTS][0];
+        url = doc[google.picker.Document.URL];
+      }
+      //var message = 'You picked: ' + url;
+      $('.imageLink').val(url);
+    }
+	
+    $('.selectImageButton').click(function(evt) {
+    	evt.preventDefault();
+    	createPicker();
+    });
+    
 	function AJ_engineLoaded(aj) {
 
+		
 		AJ.statusBar = $.ajInitStatusBar($("#ajstatusbar"), aj);
 		AJ.notificationBar = $.ajInitNotificationBar($("#ajnotificationbar"), aj);
 		//AJ.navbar = $.ajInitNavbar($("#ajnavbar"), aj);
