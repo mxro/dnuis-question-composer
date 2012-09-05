@@ -223,6 +223,12 @@ html,body {
 		//AJ.navbar = $.ajInitNavbar($("#ajnavbar"), aj);
 		AJ.progressBar=$.ajInitProgressBar($("#ajprogressbar"));
 		
+		sf = $.initStrategyQuestionForm({
+			elem : $("#strategyQuestionForm")
+			
+		});
+		
+		
 		var client = aj.createClient();
 		
 		sd = $.initStrategyQuestionData({client: client});
@@ -231,17 +237,13 @@ html,body {
 			AJ.ui.showProgressBar();
 			sd.submitQuestion(res, function(node, secret) {
 				AJ.ui.hideProgressBar();
-				AJ.ui.notify("Question uploaded successfully: "+node+" "+secret);
+				AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
 			});
 		});
 		
 	}
 
 	window.onload = function() {
-		sf = $.initStrategyQuestionForm({
-			elem : $("#strategyQuestionForm")
-			
-		});
 		
 		
 	}

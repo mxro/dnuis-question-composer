@@ -47,7 +47,9 @@
 			
 			
 			return {
+				show: qf.show,
 				submit: qf.submit
+				
 			};
 		};
 

@@ -2,15 +2,7 @@
 
 (function($, AJ) {
 
-	// constants ------
-	var aStrategyQuestion = client
-			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Strategy_Quadrant_Questi");
-	var aBrandName = client
-			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Name");
-	var aBrandImage = client
-			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Image");
-	var aCorrectStrategy = client
-			.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
+	
 	
 	
 	$.initStrategyQuestionData = function(params) {
@@ -18,7 +10,15 @@
 		// final parameters
 		var client = params.client;
 
-		
+		// constants ------
+		var aStrategyQuestion = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Strategy_Quadrant_Questi");
+		var aBrandName = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Name");
+		var aBrandImage = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Image");
+		var aCorrectStrategy = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
 
 		var qd = {};
 
@@ -37,7 +37,7 @@
 					client.appendSafe({
 						node : "q",
 						atAddress : "./q",
-						to : res.seedNode,
+						to : res.root,
 						onSuccess : function(ar) {
 							qd.priv.writeQuestionDataToNode(ar.appendedNode,
 									res.secret, data, onSuccess);
