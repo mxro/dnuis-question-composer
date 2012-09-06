@@ -43,6 +43,12 @@
 						elem.attr('checked',true);
 					}
 				});
+				
+				$('.imagePreview', elem).attr("src", inputs.imageLink);
+				if (inputs.imageLink) {
+					$('.imagePreviewGroup', elem).show();
+				}
+				
 				elem.show();
 				
 			};
@@ -54,6 +60,7 @@
 				$('.brandName', elem).val("");
 				$('.imageLink', elem).val("");
 				$('.justification', elem).val("");
+				$('.imagePreviewGroup', elem).hide();
 				elem.show();
 			};
 			
