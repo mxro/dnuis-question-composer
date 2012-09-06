@@ -24,15 +24,8 @@
 			qc.sd = $.initStrategyQuestionData({client: client});
 			
 			qc.sf = $.initStrategyQuestionForm({
-				elem : $(".strategyQuestionForm", elem)
-			});
-			
-			
-			// init UI
-			(function() {
-				$('.submitButtonRow', elem).show();
-				
-				qc.sf.newQuestion(function(res) {
+				elem : $(".strategyQuestionForm", elem),
+				onSubmit: function(res) {
 					AJ.ui.showProgressBar();
 					qc.sf.hide();
 					$('.submitButtonRow', elem).hide();
@@ -42,7 +35,15 @@
 						$('.questionLink', elem).attr('href', "http://appjangle.com/view#"+node.url()+"&"+secret);
 						$('.successMessage', elem).fadeIn();
 					});
-				});
+				}
+			});
+			
+			
+			// init UI
+			(function() {
+				$('.submitButtonRow', elem).show();
+				
+				qc.sf.newQuestion();
 
 				
 				$('.contributeAnotherQuestionButton', elem).click(function(evt) {
@@ -51,7 +52,7 @@
 					$('.successMessage', elem).hide();
 					
 					$('.submitButtonRow', elem).show();
-					qc.sf.show();
+					qc.sf.newQuestion();
 				});
 				
 				$('.submitButton', elem).click(function(evt) {
