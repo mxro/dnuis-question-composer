@@ -30,6 +30,21 @@
 				}
 
 				qf.onSubmit(inputs);
+				
+			};
+			
+			qf.loadQuestion = function(inputs) {
+				$('.brandName', elem).val(inputs.brandName);
+				$('.imageLink', elem).val(inputs.imageLink);
+				$('.justification', elem).val(inputs.justification);
+				
+				$('input[name=optionsRadios]', elem).each(function(index, value) {
+					if (elem.val() === inputs.correctStrategy) {
+						elem.attr('checked',true);
+					}
+				});
+				elem.show();
+				
 			};
 			
 			qf.newQuestion = function(onSubmit) {
@@ -39,7 +54,10 @@
 				$('.brandName', elem).val("");
 				$('.imageLink', elem).val("");
 				$('.justification', elem).val("");
+				elem.show();
 			};
+			
+			
 			
 			qf.hide = function() {
 				elem.hide();
@@ -90,9 +108,11 @@
 			
 			
 			return {
+				loadQuestion: qf.loadQuestion,
 				newQuestion: qf.newQuestion,
 				submit: qf.submit,
 				hide: qf.hide
+				
 			};
 		};
 
