@@ -10,8 +10,8 @@
 			var elem = params.elem;
 			var client = params.client;
 			
-			var qc.sf = null;
-			var qc.sd = null;
+			qc.sf = null;
+			qc.sd = null;
 			
 			qc.hide = function() {
 				elem.hide();
