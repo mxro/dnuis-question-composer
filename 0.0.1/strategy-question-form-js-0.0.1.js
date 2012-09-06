@@ -88,7 +88,7 @@
 			    	qf.priv.createPicker();
 			    });
 			}) ();
-			
+
 			
 			
 			return {

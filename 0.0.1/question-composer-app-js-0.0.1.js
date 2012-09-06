@@ -41,6 +41,7 @@
 						$('.successMessage', elem).fadeIn();
 					});
 				});
+
 				
 				$('.contributeAnotherQuestionButton', elem).click(function(evt) {
 					evt.preventDefault();
