@@ -32,7 +32,7 @@
 				qf.onSubmit(inputs);
 			};
 			
-			qf.show = function(onSubmit) {
+			qf.newQuestion = function(onSubmit) {
 				if (onSubmit) {
 					qf.onSubmit = onSubmit;
 				}
@@ -47,14 +47,8 @@
 			
 			$('.moreInfos', elem).popover();
 
-			
-			$('.submitButton', elem).click(function(evt) {
-				qf.submit();
-			});
-			
-			
 			return {
-				show: qf.show,
+				newQuestion: qf.newQuestion,
 				submit: qf.submit,
 				hide: qf.hide
 			};

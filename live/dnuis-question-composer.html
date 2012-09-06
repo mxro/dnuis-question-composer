@@ -104,7 +104,7 @@ html,body {
 						</div>
 					</div>
 
-					<div id="strategyQuestionForm">
+					<div class="strategyQuestionForm">
 						<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-form-html-0.0.1") -->
 					</div>
 
@@ -251,6 +251,12 @@ html,body {
 // 
 </script>
 
+<script>
+//
+<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/question-composer-app-js-0.0.1") -->
+//
+</script>
+
 	<script>
 
 
@@ -311,31 +317,9 @@ html,body {
 		
 		var client = aj.createClient();
 		
-		sd = $.initStrategyQuestionData({client: client});
-		
-		sf = $.initStrategyQuestionForm({
-			elem : $("#strategyQuestionForm"),
-			onSubmit: function(res) {
-				AJ.ui.showProgressBar();
-				sf.hide();
-				sd.submitQuestion(res, function(node, secret) {
-					AJ.ui.hideProgressBar();
-					
-					$('.questionLink').attr('href', "http://appjangle.com/view#"node.url()+"&"+secret);
-					$('.successMessage').fadeIn();
-					//AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
-				});
-			}
-		});
-		
-		
-		sf.show();
-		
-		$('.contributeAnotherQuestionButton').click(function(evt) {
-			evt.preventDefault();
-			
-			$('.successMessage').hide();
-			sf.show();
+		var composerapp = $.initQuestionComposerApp({
+			elem: $(window),
+			client: client
 		});
 		
 	}
