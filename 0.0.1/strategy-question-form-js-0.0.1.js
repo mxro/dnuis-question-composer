@@ -79,8 +79,8 @@
 		            		new google.picker.ImageSearchView()
 		            		.setLicense(google.picker.ImageSearchView.License.NONE)
 		            		.setSize(google.picker.ImageSearchView.Size.SIZE_QSVGA)).
-		            addView(new google.picker.DocsUploadView()).
-		            addView(new google.picker.PhotosView()).
+		           /* addView(new google.picker.DocsUploadView()).
+		            addView(new google.picker.PhotosView()).*/
 		            setCallback(qf.priv.pickerCallback).
 		            build();
 		        
