@@ -250,7 +250,7 @@ html,body {
         var picker = new google.picker.PickerBuilder().
             addView(
             		new google.picker.ImageSearchView()
-            		.setLicense("none")
+            		.setLicense(google.picker.ImageSearchView.License.NONE)
             		.setSize(google.picker.ImageSearchView.Size.SIZE_QSVGA)).
             addView(new google.picker.DocsUploadView()).
             addView(new google.picker.PhotosView()).
