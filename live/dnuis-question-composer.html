@@ -268,6 +268,8 @@ html,body {
         var doc = data[google.picker.Response.DOCUMENTS][0];
         url = doc["thumbnails"][1].url;
         $('.imageLink').val(url);
+        $('.imagePreviewGroup').show();
+        $('.imagePreview.').attr("src", url);
       }
       //var message = 'You picked: ' + url;
      
