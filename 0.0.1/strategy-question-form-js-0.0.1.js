@@ -76,13 +76,11 @@
 			
 			// init UI
 			(function() {
+				
 				$('.moreInfos', elem).popover();
 
 				// Use the Google Loader script to load the google.picker script.
-				   
-			  
 
-				
 			    $('.selectImageButton', elem).click(function(evt) {
 			    	evt.preventDefault();
 			    	qf.priv.createPicker();

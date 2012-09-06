@@ -90,54 +90,55 @@ html,body {
 				</div>
 			</div>
 
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="row-fluid">
+			<div id="composer">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
 
-						<div class="span12">
-							<div class="page-header">
-								<h1>
-									Contribute a Question <small>... in one simple step.</small>
-								</h1>
+							<div class="span12">
+								<div class="page-header">
+									<h1>
+										Contribute a Question <small>... in one simple step.</small>
+									</h1>
 
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div class="strategyQuestionForm">
-						<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-form-html-0.0.1") -->
-					</div>
+						<div class="strategyQuestionForm">
+							<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-form-html-0.0.1") -->
+						</div>
 
-					<div class="row-fluid">
-						<div class="span12">
-							<button class="submitButton btn btn-success btn-large btn-block"
-								type="button">
-								<i class="icon-ok icon-white"></i> Submit My Question
-							</button>
+						<div class="submitButtonRow row-fluid">
+							<div class="span12">
+								<button class="submitButton btn btn-success btn-large btn-block"
+									type="button">
+									<i class="icon-ok icon-white"></i> Submit My Question
+								</button>
+							</div>
+						</div>
+
+						<div class="successMessage hero-unit" style="display: none;">
+							<h1>Awesome!</h1>
+							<p>Your question has been submitted and will show up in the
+								game once it has been reviewed.</p>
+							<p>You can see and edit your question under the following
+								link:</p>
+							<blockquote>
+								<p>
+									<a class="questionLink" href="#">Your Question Link (right
+										click and select copy link to save)</a>
+								</p>
+							</blockquote>
+							<p>
+								<a
+									class="contributeAnotherQuestionButton btn btn-success btn-large">
+									Great, let me contribute another question! </a>
+							</p>
 						</div>
 					</div>
 
-					<div class="successMessage hero-unit" style="display: none;">
-						<h1>Awesome!</h1>
-						<p>Your question has been submitted and will show up in the
-							game once it has been reviewed.</p>
-						<p>You can see and edit your question under the following
-							link:</p>
-						<blockquote>
-							<p>
-								<a class="questionLink" href="#">Your Question Link (right
-									click and select copy link to save)</a>
-							</p>
-						</blockquote>
-						<p>
-							<a
-								class="contributeAnotherQuestionButton btn btn-success btn-large">
-								Great, let me contribute another question! </a>
-						</p>
-					</div>
 				</div>
-
-
 
 			</div>
 
@@ -251,7 +252,7 @@ html,body {
 // 
 </script>
 
-<script>
+	<script>
 //
 <!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/question-composer-app-js-0.0.1") -->
 //
@@ -281,7 +282,7 @@ html,body {
 		var client = aj.createClient();
 		
 		var composerapp = $.initQuestionComposerApp({
-			elem: $(window),
+			elem: $('#composer'),
 			client: client
 		});
 		

@@ -25,15 +25,17 @@
 			
 			qc.sf = $.initStrategyQuestionForm({
 				elem : $(".strategyQuestionForm", elem)
-				
 			});
 			
 			
 			// init UI
 			(function() {
+				$('.submitButtonRow', elem).show();
+				
 				qc.sf.newQuestion(function(res) {
 					AJ.ui.showProgressBar();
 					qc.sf.hide();
+					$('.submitButtonRow', elem).hide();
 					qc.sd.submitQuestion(res, function(node, secret) {
 						AJ.ui.hideProgressBar();
 						
@@ -47,6 +49,8 @@
 					evt.preventDefault();
 					
 					$('.successMessage', elem).hide();
+					
+					$('.submitButtonRow', elem).show();
 					qc.sf.show();
 				});
 				
