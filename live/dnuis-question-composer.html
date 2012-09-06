@@ -263,16 +263,15 @@ html,body {
     // A simple callback implementation.
     function pickerCallback(data) {
       var url = 'nothing';
-      //alert(JSON.stringify(data));
+      
       if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
         var doc = data[google.picker.Response.DOCUMENTS][0];
         url = doc["thumbnails"][1].url;
         $('.imageLink').val(url);
         $('.imagePreview').attr("src", url);
-        $('.imagePreviewGroup').fadeIn('fast');
+        $('.imagePreviewGroup').fadeIn('slow');
       }
-      //var message = 'You picked: ' + url;
-     
+      
     }
 	
     $('.selectImageButton').click(function(evt) {
@@ -300,7 +299,7 @@ html,body {
 				sd.submitQuestion(res, function(node, secret) {
 					AJ.ui.hideProgressBar();
 					
-					$('.questionLink').attr('href', node.url()+"&"+secret);
+					$('.questionLink').attr('href', "http://appjangle.com/view#"node.url()+"&"+secret);
 					$('.successMessage').fadeIn();
 					//AJ.ui.notify("Question uploaded successfully: "+node.url()+" "+secret);
 				});
