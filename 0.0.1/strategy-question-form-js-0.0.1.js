@@ -48,9 +48,7 @@
 			$('.moreInfos', elem).popover();
 
 			
-			$('.submitButton', elem).click(function(evt) {
-				qf.submit();
-			});
+			
 			
 			
 			return {
