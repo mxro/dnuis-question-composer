@@ -80,7 +80,7 @@
 
 				// Use the Google Loader script to load the google.picker script.
 				   
-			    google.load('picker', '1');
+			  
 
 				
 			    $('.selectImageButton', elem).click(function(evt) {
