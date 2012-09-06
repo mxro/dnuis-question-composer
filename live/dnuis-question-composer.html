@@ -260,8 +260,7 @@ html,body {
 	<script>
 
 
-	var sf = null;
-	var sd = null;
+	
 	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
@@ -269,43 +268,7 @@ html,body {
 		
 	}
 
-	// Use the Google Loader script to load the google.picker script.
-    //google.setOnLoadCallback(createPicker);
-    google.load('picker', '1');
-
-    // Create and render a Picker object for searching images.
-    function createPicker() {
-        var picker = new google.picker.PickerBuilder().
-            addView(
-            		new google.picker.ImageSearchView()
-            		.setLicense(google.picker.ImageSearchView.License.NONE)
-            		.setSize(google.picker.ImageSearchView.Size.SIZE_QSVGA)).
-            addView(new google.picker.DocsUploadView()).
-            addView(new google.picker.PhotosView()).
-            setCallback(pickerCallback).
-            build();
-        
-        picker.setVisible(true);
-    }
-
-    // A simple callback implementation.
-    function pickerCallback(data) {
-      var url = 'nothing';
-      
-      if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-        var doc = data[google.picker.Response.DOCUMENTS][0];
-        url = doc["thumbnails"][1].url;
-        $('.imageLink').val(url);
-        $('.imagePreview').attr("src", url);
-        $('.imagePreviewGroup').fadeIn('slow');
-      }
-      
-    }
 	
-    $('.selectImageButton').click(function(evt) {
-    	evt.preventDefault();
-    	createPicker();
-    });
     
 	function AJ_engineLoaded(aj) {
 

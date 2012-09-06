@@ -45,8 +45,52 @@
 				elem.hide();
 			};
 			
-			$('.moreInfos', elem).popover();
+			
+			qf.priv = {};
+			
+			qf.priv.createPicker = function() {
+				 var picker = new google.picker.PickerBuilder().
+		            addView(
+		            		new google.picker.ImageSearchView()
+		            		.setLicense(google.picker.ImageSearchView.License.NONE)
+		            		.setSize(google.picker.ImageSearchView.Size.SIZE_QSVGA)).
+		            addView(new google.picker.DocsUploadView()).
+		            addView(new google.picker.PhotosView()).
+		            setCallback(qf.priv.pickerCallback).
+		            build();
+		        
+		        picker.setVisible(true);
+			};
+			
+			qf.priv.pickerCallback = function(data) {
+				 var url = 'nothing';
+			      
+			      if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+			        var doc = data[google.picker.Response.DOCUMENTS][0];
+			        url = doc["thumbnails"][1].url;
+			        $('.imageLink', elem).val(url);
+			        $('.imagePreview', elem).attr("src", url);
+			        $('.imagePreviewGroup', elem).fadeIn('slow');
+			      }
+			};
+			
+			// init UI
+			(function() {
+				$('.moreInfos', elem).popover();
 
+				// Use the Google Loader script to load the google.picker script.
+				   
+			    google.load('picker', '1');
+
+				
+			    $('.selectImageButton', elem).click(function(evt) {
+			    	evt.preventDefault();
+			    	qf.priv.createPicker();
+			    });
+			}) ();
+			
+			
+			
 			return {
 				newQuestion: qf.newQuestion,
 				submit: qf.submit,
