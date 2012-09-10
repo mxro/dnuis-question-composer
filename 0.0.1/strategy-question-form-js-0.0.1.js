@@ -47,7 +47,16 @@
 					}
 				});
 				
-				$('.imagePreview', elem).attr("src", inputs.imageLink);
+				setTimeout(function() {
+					try {
+						$('.imagePreview', elem).attr("src", inputs.imageLink);
+					} catch (err) {
+						// sometimes image might not be available.
+					}
+				}, 1000);
+				
+				
+				
 				if (inputs.imageLink) {
 					$('.imagePreviewGroup', elem).show();
 				}
