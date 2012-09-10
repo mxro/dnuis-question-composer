@@ -42,8 +42,8 @@
 				$('.justification', elem).val(inputs.justification);
 				
 				$('input[name=optionsRadios]', elem).each(function(index, value) {
-					if (elem.val() === inputs.correctStrategy) {
-						elem.attr('checked',true);
+					if (value.val() === inputs.correctStrategy) {
+						value.attr('checked',true);
 					}
 				});
 				
