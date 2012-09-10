@@ -26,6 +26,45 @@
 
 		};
 
+		qd.loadQuestion = function(node, secret, onSuccess) {
+			client.load({
+				node: node,
+				secret: secret,
+				onSuccess: function(res) {
+					
+					var data = {};
+					
+					client.select({
+						from: res.loadedNode,
+						linkingTo: aBrandName,
+						onSuccess: function(sr) {
+							data.brandName = sr.values[0].value();
+							
+							client.select({
+								from: res.loadedNode,
+								linkingTo: aBrandImage
+								onSuccess: function(sr) {
+									data.imageLink = sr.values[0].value();
+									
+									client.select({
+										from: res.loadedNode,
+										linkingTo: aCorrectStrategy,
+										onSuccess: function(sr) {
+											data.correctStrategy = st.values[0].value();
+											
+											onSuccess(data);
+										}
+									});
+								}
+							});
+							
+						}
+					});
+					
+				}
+			})
+		};
+		
 		qd.priv = {};
 
 		qd.priv.prepareSeedNodeForQuestion = function(data, onSuccess) {
@@ -53,7 +92,7 @@
 		};
 
 		/**
-		 * Write to a node all the data defining a strategy quadrant question. 
+		 * Write to a node all the data defining a strategy quadrant question.
 		 */
 		qd.priv.writeQuestionDataToNode = function(node, secret, data,
 				onSuccess) {
@@ -95,8 +134,6 @@
 				to : correctStrategy
 			});
 
-			
-			
 			client.commit({
 				onSuccess : function() {
 					
@@ -118,8 +155,11 @@
 
 		};
 
+		
+		
 		return {
-			submitQuestion : qd.submitQuestion
+			submitQuestion : qd.submitQuestion,
+			loadQuestion: qd.loadQuestion
 		};
 	};
 
