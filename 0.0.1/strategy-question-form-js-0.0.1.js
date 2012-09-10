@@ -41,11 +41,13 @@
 				$('.imageLink', elem).val(inputs.imageLink);
 				$('.justification', elem).val(inputs.justification);
 				
-				$('input[name=optionsRadios]', elem).each(function(index, value) {
-					if (value.val() === inputs.correctStrategy) {
-						value.attr('checked',true);
-					}
-				});
+				$("input[name=optionsRadios][value=" + inputs.correctStrategy + "]", elem).attr('checked', 'checked');
+				
+				//$('input[name=optionsRadios]', elem).each(function(index, value) {
+				//	if (value.attr('value') === inputs.correctStrategy) {
+				//		value.attr('checked',true);
+				//	}
+				//});
 				
 				setTimeout(function() {
 					try {
