@@ -2,7 +2,6 @@
 
 (function($, AJ) {
 
-	
 	$.initStrategyQuestionData = function(params) {
 
 		// final parameters
@@ -28,43 +27,44 @@
 
 		qd.loadQuestion = function(node, secret, onSuccess) {
 			client.load({
-				node: node,
-				secret: secret,
-				onSuccess: function(res) {
-					
+				node : node,
+				secret : secret,
+				onSuccess : function(res) {
+
 					var data = {};
-					
+
 					client.select({
-						from: res.loadedNode,
-						linkingTo: aBrandName,
-						onSuccess: function(sr) {
+						from : res.loadedNode,
+						linkingTo : aBrandName,
+						onSuccess : function(sr) {
 							data.brandName = sr.values[0].value();
-							
+
 							client.select({
-								from: res.loadedNode,
-								linkingTo: aBrandImage
-								onSuccess: function(sr) {
+								from : res.loadedNode,
+								linkingTo : aBrandImage,
+								onSuccess : function(sr) {
 									data.imageLink = sr.values[0].value();
-									
+
 									client.select({
-										from: res.loadedNode,
-										linkingTo: aCorrectStrategy,
-										onSuccess: function(sr) {
-											data.correctStrategy = st.values[0].value();
-											
+										from : res.loadedNode,
+										linkingTo : aCorrectStrategy,
+										onSuccess : function(sr) {
+											data.correctStrategy = sr.values[0]
+													.value();
+
 											onSuccess(data);
 										}
 									});
 								}
 							});
-							
+
 						}
 					});
-					
+
 				}
 			})
 		};
-		
+
 		qd.priv = {};
 
 		qd.priv.prepareSeedNodeForQuestion = function(data, onSuccess) {
@@ -134,32 +134,40 @@
 				to : correctStrategy
 			});
 
-			client.commit({
-				onSuccess : function() {
-					
-					onSuccess(node, secret);
-					
-					client.post({
-						message: node.url()+"&"+secret,
-						to: client.reference("http://slicnet.com/questio/questio"),
-						secret: "pc1aj8opxtdjk19",
-						onSuccess: function(res) {
-							AJ.ui.notify("Last Status: Question posted for review.", "alert-success");
-						},
-						onFailure: function(ex) {
-							AJ.ui.notify("Unexpected exception while posting question: "+ex, "alert-error");
+			client
+					.commit({
+						onSuccess : function() {
+
+							onSuccess(node, secret);
+
+							client
+									.post({
+										message : node.url() + "&" + secret,
+										to : client
+												.reference("http://slicnet.com/questio/questio"),
+										secret : "pc1aj8opxtdjk19",
+										onSuccess : function(res) {
+											AJ.ui
+													.notify(
+															"Last Status: Question posted for review.",
+															"alert-success");
+										},
+										onFailure : function(ex) {
+											AJ.ui
+													.notify(
+															"Unexpected exception while posting question: "
+																	+ ex,
+															"alert-error");
+										}
+									});
 						}
 					});
-				}
-			});
 
 		};
 
-		
-		
 		return {
 			submitQuestion : qd.submitQuestion,
-			loadQuestion: qd.loadQuestion
+			loadQuestion : qd.loadQuestion
 		};
 	};
 
