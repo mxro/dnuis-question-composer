@@ -4,10 +4,13 @@
 
 		$.initStrategyQuestionForm = function(params) {
 
-			var qf = {};
-			
 			var elem = params.elem;
+			
+			var qf = {};
+		
 			qf.onSubmit = params.onSubmit;
+			qf.loadedNode = params.loadedNode;
+			qf.secret = params.secret;
 			
 			qf.submit = function() {
 
@@ -118,7 +121,9 @@
 				loadQuestion: qf.loadQuestion,
 				newQuestion: qf.newQuestion,
 				submit: qf.submit,
-				hide: qf.hide
+				hide: qf.hide,
+				getLoadedNode: qf.loadedNode,
+				getSecret: qf.secret
 				
 			};
 		};
