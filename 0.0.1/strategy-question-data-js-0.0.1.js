@@ -95,6 +95,8 @@
 				to : correctStrategy
 			});
 
+			
+			
 			client.commit({
 				onSuccess : function() {
 					
