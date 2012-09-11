@@ -12,9 +12,8 @@
 		qf.loadedNode = params.loadedNode;
 		qf.secret = params.secret;
 
-		qf.submit = function() {
-
-			var inputs = {
+		qf.getData = function() {
+			return {
 				brandName : $('.brandName', elem).val(),
 				imageLink : $('.imageLink', elem).val(),
 				videoLink : $('.videoLink', elem).val(),
@@ -22,6 +21,11 @@
 				correctStrategy : $('input[name=optionsRadios]:checked', elem)
 						.val()
 			};
+		}
+		
+		qf.submit = function() {
+
+			var inputs = getData();
 
 			// validate inputs
 			if (!inputs.brandName) {
@@ -191,7 +195,8 @@
 			submit : qf.submit,
 			hide : qf.hide,
 			getLoadedNode : qf.loadedNode,
-			getSecret : qf.secret
+			getSecret : qf.secret,
+			getData: qf.getData
 
 		};
 	};
