@@ -25,7 +25,7 @@
 		
 		qf.submit = function() {
 
-			var inputs = getData();
+			var inputs = qf.getData();
 
 			// validate inputs
 			if (!inputs.brandName) {
