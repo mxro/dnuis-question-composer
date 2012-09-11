@@ -48,13 +48,7 @@
 					"input[name=optionsRadios][value=" + inputs.correctStrategy
 							+ "]", elem).attr('checked', 'checked');
 
-			// $('input[name=optionsRadios]', elem).each(function(index,
-			// value) {
-			// if (value.attr('value') === inputs.correctStrategy) {
-			// value.attr('checked',true);
-			// }
-			// });
-
+		
 			setTimeout(function() {
 				try {
 					$('.imagePreview', elem).attr("src", inputs.imageLink);
@@ -77,8 +71,10 @@
 			}
 			$('.brandName', elem).val("");
 			$('.imageLink', elem).val("");
+			$('.videoLink', elem).val("");
 			$('.justification', elem).val("");
 			$('.imagePreviewGroup', elem).hide();
+			$('.videoPreviewGroup', elem).hide();
 			elem.show();
 		};
 
@@ -133,14 +129,20 @@
 		qf.priv.videoPickerCallback = function(data) {
 			var url = 'nothing';
 			
-			alert(JSON.stringify(data));
+			//alert(JSON.stringify(data));
 			
 			if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
 				var doc = data[google.picker.Response.DOCUMENTS][0];
-				url = doc["thumbnails"][1].url;
-				$('.imageLink', elem).val(url);
-				$('.imagePreview', elem).attr("src", url);
-				$('.imagePreviewGroup', elem).fadeIn('slow');
+				
+				$('.videoLink', elem).val(doc["url"]);
+				
+				var embedLink = doc["embedUrl"];
+				var videoImage = doc["thumbnails"][1].url;
+				
+				$('.videoPreview', elem).html("<iframe width='280' height='215' src='"+embedLink+"' frameborder='0' allowfullscreen></iframe>")
+				//$('.imageLink', elem).val(videoImage);
+				//$('.imagePreview', elem).attr("src", videoImage);
+				//$('.imagePreviewGroup', elem).fadeIn('slow');
 			}
 		};
 
