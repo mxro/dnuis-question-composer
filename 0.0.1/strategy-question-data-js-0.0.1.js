@@ -106,7 +106,7 @@
 
 		qd.updateQuestionData = function(node, secret, data, onSuccess) {
 			client.select({
-				from : res.loadedNode,
+				from : node,
 				linkingTo : aBrandName,
 				onSuccess : function(sr) {
 					var newBrandName = client.updateValue({
@@ -123,7 +123,7 @@
 			});
 
 			client.select({
-				from : res.loadedNode,
+				from : node,
 				linkingTo : aBrandImage,
 				onSuccess : function(sr) {
 					var newBrandImage = client.updateValue({
@@ -139,7 +139,7 @@
 			});
 
 			client.select({
-				from : res.loadedNode,
+				from : node,
 				linkingTo : aBrandVideo,
 				onSuccess : function(sr) {
 					var newNode = client.updateValue({
@@ -155,7 +155,7 @@
 			});
 
 			client.select({
-				from : res.loadedNode,
+				from : node,
 				linkingTo : aCorrectStrategy,
 				onSuccess : function(sr) {
 					var newNode = client.updateValue({
@@ -171,7 +171,7 @@
 			});
 
 			client.select({
-				from : res.loadedNode,
+				from : node,
 				linkingTo : aJustification,
 				onSuccess : function(sr) {
 					var newNode = client.updateValue({
