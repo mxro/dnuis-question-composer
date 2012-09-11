@@ -17,6 +17,7 @@
 				var inputs = {
 					brandName : $('.brandName', elem).val(),
 					imageLink : $('.imageLink', elem).val(),
+					videoLink: $('.videoLink', elem).val(),
 					justification: $('.justification', elem).val(),
 					correctStrategy: $('input[name=optionsRadios]:checked', elem).val()
 				};
@@ -39,6 +40,7 @@
 			qf.loadQuestion = function(inputs) {
 				$('.brandName', elem).val(inputs.brandName);
 				$('.imageLink', elem).val(inputs.imageLink);
+				$('.videoLink', elem).val(inputs.videoLink);
 				$('.justification', elem).val(inputs.justification);
 				
 				$("input[name=optionsRadios][value=" + inputs.correctStrategy + "]", elem).attr('checked', 'checked');

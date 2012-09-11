@@ -14,8 +14,12 @@
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Name");
 		var aBrandImage = client
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Brand_Image");
+		var aBrandVideo = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Video_Link");
 		var aCorrectStrategy = client
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
+		var aJustification = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Justification");
 
 		var qd = {};
 
@@ -45,16 +49,43 @@
 								onSuccess : function(sr) {
 									data.imageLink = sr.values[0].value();
 
+									
 									client.select({
-										from : res.loadedNode,
-										linkingTo : aCorrectStrategy,
-										onSuccess : function(sr) {
-											data.correctStrategy = sr.values[0]
-													.value();
+										from: res.loadedNode,
+										linkingTo: aBrandVideo,
+										onSuccess: function(sr) {
+											if (sr.values.length > 0) {
+												data.videoLink = sr.values[0].value();
+											}
+											
+											
+											client.select({
+												from : res.loadedNode,
+												linkingTo : aCorrectStrategy,
+												onSuccess : function(sr) {
+													data.correctStrategy = sr.values[0]
+															.value();
 
-											onSuccess(data);
+													
+													client.select({
+														from: res.loadedNode,
+														linkingTo: aJustification,
+														onSuccess: function(sr) {
+															if (sr.values.length > 0) {
+																data.justification = sr.values[0].value();
+															}
+															
+															onSuccess(data);
+														}
+													});
+													
+													
+												}
+											});
 										}
 									});
+									
+									
 								}
 							});
 
@@ -134,6 +165,28 @@
 				to : correctStrategy
 			});
 
+			var justification = client.append({
+				node : data.justification,
+				to : node,
+				atAddress : "./justification"
+			});
+
+			client.append({
+				node: aJustification,
+				to: justification
+			});
+			
+			var brandVideo = client.append({
+				node: data.videoLink,
+				to: node,
+				atAddress: "./brandVideoLink"
+			});
+			
+			client.append({
+				node: aBrandVideo,
+				to: brandVideo
+			});
+			
 			client
 					.commit({
 						onSuccess : function() {
