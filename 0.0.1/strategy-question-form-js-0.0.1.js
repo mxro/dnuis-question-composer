@@ -48,30 +48,28 @@
 					"input[name=optionsRadios][value=" + inputs.correctStrategy
 							+ "]", elem).attr('checked', 'checked');
 
-			setTimeout(function() {
-				try {
-					
-					if (inputs.imageLink) {
-						$('.imagePreview', elem).attr("src", inputs.imageLink);
-						$('.imagePreviewGroup', elem).show();
-					}
-					
-					if (inputs.videoLink) {
-						$('.videoPreview', elem)
+			setTimeout(
+					function() {
+						try {
+
+							if (inputs.imageLink) {
+								$('.imagePreview', elem).attr("src",
+										inputs.imageLink);
+								$('.imagePreviewGroup', elem).show();
+							}
+
+							if (inputs.videoLink) {
+								$('.videoPreview', elem)
 								.html(
 										"<iframe width='230' height='129' src='"
-												+ inputs.imageLink
-												+ "' frameborder='0' allowfullscreen></iframe>")
-						$('.videoPreviewGroup', elem).show;
-					}
-				} catch (err) {
-					// sometimes image might not be available.
-				}
-			}, 1000);
-
-			
-
-			
+												+ qf.priv.createYouTubeEmbedLink(inputs.imageLink)
+												+ "' frameborder='0' allowfullscreen></iframe>");
+								$('.videoPreviewGroup', elem).show;
+							}
+						} catch (err) {
+							// sometimes image might not be available.
+						}
+					}, 1000);
 
 			elem.show();
 
@@ -114,6 +112,10 @@
 			picker.setVisible(true);
 		};
 
+		qf.priv.createYouTubeEmbedLink = function(link) {
+			return link.replace("http://www.youtube.com/watch?v=", "http://www.youtube.com/embed/");
+		}
+
 		qf.priv.pickerCallback = function(data) {
 			var url = 'nothing';
 
@@ -154,7 +156,7 @@
 				$('.videoPreview', elem)
 						.html(
 								"<iframe width='230' height='129' src='"
-										+ doc['url']
+										+ qf.priv.createYouTubeEmbedLink(doc['url'])
 										+ "' frameborder='0' allowfullscreen></iframe>")
 				$('.videoPreviewGroup', elem).fadeIn('fast');
 

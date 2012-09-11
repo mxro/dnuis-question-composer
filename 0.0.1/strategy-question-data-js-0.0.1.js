@@ -30,72 +30,170 @@
 		};
 
 		qd.loadQuestion = function(node, secret, onSuccess) {
-			client.load({
-				node : node,
-				secret : secret,
-				onSuccess : function(res) {
+			client
+					.load({
+						node : node,
+						secret : secret,
+						onSuccess : function(res) {
 
-					var data = {};
+							var data = {};
 
-					client.select({
-						from : res.loadedNode,
-						linkingTo : aBrandName,
-						onSuccess : function(sr) {
-							data.brandName = sr.values[0].value();
+							client
+									.select({
+										from : res.loadedNode,
+										linkingTo : aBrandName,
+										onSuccess : function(sr) {
+											data.brandName = sr.values[0]
+													.value();
 
-							client.select({
-								from : res.loadedNode,
-								linkingTo : aBrandImage,
-								onSuccess : function(sr) {
-									data.imageLink = sr.values[0].value();
+											client
+													.select({
+														from : res.loadedNode,
+														linkingTo : aBrandImage,
+														onSuccess : function(sr) {
+															data.imageLink = sr.values[0]
+																	.value();
 
-									
-									client.select({
-										from: res.loadedNode,
-										linkingTo: aBrandVideo,
-										onSuccess: function(sr) {
-											if (sr.values.length > 0) {
-												data.videoLink = sr.values[0].value();
-											}
-											
-											
-											client.select({
-												from : res.loadedNode,
-												linkingTo : aCorrectStrategy,
-												onSuccess : function(sr) {
-													data.correctStrategy = sr.values[0]
-															.value();
+															client
+																	.select({
+																		from : res.loadedNode,
+																		linkingTo : aBrandVideo,
+																		onSuccess : function(
+																				sr) {
+																			if (sr.values.length > 0) {
+																				data.videoLink = sr.values[0]
+																						.value();
+																			}
 
-													
-													client.select({
-														from: res.loadedNode,
-														linkingTo: aJustification,
-														onSuccess: function(sr) {
-															if (sr.values.length > 0) {
-																data.justification = sr.values[0].value();
-															}
-															
-															onSuccess(data);
+																			client
+																					.select({
+																						from : res.loadedNode,
+																						linkingTo : aCorrectStrategy,
+																						onSuccess : function(
+																								sr) {
+																							data.correctStrategy = sr.values[0]
+																									.value();
+
+																							client
+																									.select({
+																										from : res.loadedNode,
+																										linkingTo : aJustification,
+																										onSuccess : function(
+																												sr) {
+																											if (sr.values.length > 0) {
+																												data.justification = sr.values[0]
+																														.value();
+																											}
+
+																											onSuccess(data);
+																										}
+																									});
+
+																						}
+																					});
+																		}
+																	});
+
 														}
 													});
-													
-													
-												}
-											});
+
 										}
 									});
-									
-									
-								}
-							});
 
 						}
+					})
+		};
+
+		qd.updateQuestionData = function(node, secret, data, onSuccess) {
+			client.select({
+				from : res.loadedNode,
+				linkingTo : aBrandName,
+				onSuccess : function(sr) {
+					var newBrandName = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.brandName
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newBrandName
 					});
 
 				}
-			})
-		};
+			});
 
+			client.select({
+				from : res.loadedNode,
+				linkingTo : aBrandImage,
+				onSuccess : function(sr) {
+					var newBrandImage = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.imageLink
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newBrandImage
+					});
+				}
+			});
+
+			client.select({
+				from : res.loadedNode,
+				linkingTo : aBrandVideo,
+				onSuccess : function(sr) {
+					var newNode = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.videoLink
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newNode
+					});
+				}
+			});
+
+			client.select({
+				from : res.loadedNode,
+				linkingTo : aCorrectStrategy,
+				onSuccess : function(sr) {
+					var newNode = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.correctStrategy
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newNode
+					});
+				}
+			});
+
+			client.select({
+				from : res.loadedNode,
+				linkingTo : aJustification,
+				onSuccess : function(sr) {
+					var newNode = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.justification
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newNode
+					});
+				}
+			});
+			
+			client.commit({
+				onSuccess: function(res) {
+					onSuccess();
+				}
+			});
+
+		}
+		
 		qd.priv = {};
 
 		qd.priv.prepareSeedNodeForQuestion = function(data, onSuccess) {
@@ -121,6 +219,8 @@
 				}
 			});
 		};
+
+		
 
 		/**
 		 * Write to a node all the data defining a strategy quadrant question.
@@ -172,21 +272,21 @@
 			});
 
 			client.append({
-				node: aJustification,
-				to: justification
+				node : aJustification,
+				to : justification
 			});
-			
+
 			var brandVideo = client.append({
-				node: data.videoLink,
-				to: node,
-				atAddress: "./brandVideoLink"
+				node : data.videoLink,
+				to : node,
+				atAddress : "./brandVideoLink"
 			});
-			
+
 			client.append({
-				node: aBrandVideo,
-				to: brandVideo
+				node : aBrandVideo,
+				to : brandVideo
 			});
-			
+
 			client
 					.commit({
 						onSuccess : function() {
@@ -220,7 +320,8 @@
 
 		return {
 			submitQuestion : qd.submitQuestion,
-			loadQuestion : qd.loadQuestion
+			loadQuestion : qd.loadQuestion,
+			updateQuestion: qd.updateQuestionData
 		};
 	};
 
