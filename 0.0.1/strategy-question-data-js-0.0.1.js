@@ -93,7 +93,7 @@
 																												from: res.loadedNode,
 																												linkingTo: anUPI,
 																												onSuccess: function(sr) {
-																													if (sr.values.lenght > 0) {
+																													if (sr.values.length > 0) {
 																														data.upi = sr.values[0].value();
 																													}
 																													
@@ -346,7 +346,7 @@
 				node : aJustification,
 				to : justification
 			});
-
+			
 			var upi = client.append({
 				node: data.upi,
 				to: node,
