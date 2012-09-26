@@ -23,7 +23,7 @@
 		var aName = client
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Name");
 		var anUPI = client
-				.refernece("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/UPI");
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/UPI");
 
 		var qd = {};
 
