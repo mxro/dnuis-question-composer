@@ -101,7 +101,7 @@
 																														from: res.loadedNode,
 																														linkingTo: aName,
 																														onSuccess: function(sr) {
-																															if (st.values.length > 0) {
+																															if (sr.values.length > 0) {
 																																data.name = sr.values[0].value();
 																															}
 																															
