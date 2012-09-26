@@ -19,7 +19,9 @@
 				videoLink : $('.videoLink', elem).val(),
 				justification : $('.justification', elem).val(),
 				correctStrategy : $('input[name=optionsRadios]:checked', elem)
-						.val()
+						.val(),
+				name: $('.name', elem).val(),
+				upi: $('.upi', elem).val()
 			};
 		}
 		
@@ -47,7 +49,9 @@
 			$('.imageLink', elem).val(inputs.imageLink);
 			$('.videoLink', elem).val(inputs.videoLink);
 			$('.justification', elem).val(inputs.justification);
-
+			$('.name', elem).val(inputs.name);
+			$('.upi', elem).val(inputs.upi);
+			
 			$(
 					"input[name=optionsRadios][value=" + inputs.correctStrategy
 							+ "]", elem).attr('checked', 'checked');
@@ -87,8 +91,11 @@
 			$('.imageLink', elem).val("");
 			$('.videoLink', elem).val("");
 			$('.justification', elem).val("");
+			$('.name', elem).val("");
+			$('.upi', elem).val("");
 			$('.imagePreviewGroup', elem).hide();
 			$('.videoPreviewGroup', elem).hide();
+			
 			elem.show();
 		};
 
