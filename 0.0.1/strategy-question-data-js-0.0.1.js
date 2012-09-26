@@ -20,6 +20,10 @@
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Correct_Strategy");
 		var aJustification = client
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Justification");
+		var aName = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/Name");
+		var anUPI = client
+				.refernece("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/8/n/Types/UPI");
 
 		var qd = {};
 
@@ -84,8 +88,32 @@
 																												data.justification = sr.values[0]
 																														.value();
 																											}
-
-																											onSuccess(data);
+																											
+																											client.select({
+																												from: res.loadedNode,
+																												linkingTo: anUPI,
+																												onSuccess: function(sr) {
+																													if (sr.values.lenght > 0) {
+																														data.upi = sr.values[0].value();
+																													}
+																													
+																													client.select({
+																														from: res.loadedNode,
+																														linkingTo: aName,
+																														onSuccess: function(sr) {
+																															if (st.values.length > 0) {
+																																data.name = sr.values[0].value();
+																															}
+																															
+																															onSuccess(data);
+																														}
+																													});
+																													
+																													
+																												}
+																											});
+																											
+																											
 																										}
 																									});
 
@@ -174,6 +202,10 @@
 				from : node,
 				linkingTo : aJustification,
 				onSuccess : function(sr) {
+					if (sr.nodes.length === 0) {
+						return;
+					}
+					
 					var newNode = client.updateValue({
 						forNode : sr.nodes[0],
 						newValue : data.justification
@@ -186,14 +218,55 @@
 				}
 			});
 			
+			client.select({
+				from: node,
+				linkingTo: anUPI,
+				onSuccess: function(sr) {
+					if (sr.nodes.length === 0) {
+						return;
+					}
+					
+					var newNode = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.upi
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newNode
+					});
+				}
+			});
+			
+			
+			client.select({
+				from: node,
+				linkingTo: aName,
+				onSuccess: function(sr) {
+					if (sr.nodes.length === 0) {
+						return;
+					}
+					
+					var newNode = client.updateValue({
+						forNode : sr.nodes[0],
+						newValue : data.name
+					});
+
+					client.replace({
+						node : sr.nodes[0],
+						withNode : newNode
+					});
+				}
+			});
+			
 			client.commit({
-				onSuccess: function(res) {
+				onSuccess : function(res) {
 					onSuccess();
 				}
 			});
 
 		}
-		
+
 		qd.priv = {};
 
 		qd.priv.prepareSeedNodeForQuestion = function(data, onSuccess) {
@@ -219,8 +292,6 @@
 				}
 			});
 		};
-
-		
 
 		/**
 		 * Write to a node all the data defining a strategy quadrant question.
@@ -276,12 +347,35 @@
 				to : justification
 			});
 
+			var upi = client.append({
+				node: data.upi,
+				to: node,
+				atAddress: "./upi"
+			});
+			
+			client.append({
+				node: anUPI,
+				to: upi
+			});
+			
+			var name = client.append({
+				node: data.name,
+				to: node,
+				atAddress: "./name"
+			});
+			
+			client.append({
+				node: aName,
+				to: name
+			});
+			
 			var brandVideo = client.append({
 				node : data.videoLink,
 				to : node,
 				atAddress : "./brandVideoLink"
 			});
 
+			
 			client.append({
 				node : aBrandVideo,
 				to : brandVideo
@@ -321,7 +415,7 @@
 		return {
 			submitQuestion : qd.submitQuestion,
 			loadQuestion : qd.loadQuestion,
-			updateQuestion: qd.updateQuestionData
+			updateQuestion : qd.updateQuestionData
 		};
 	};
 
