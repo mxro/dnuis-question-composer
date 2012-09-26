@@ -33,6 +33,13 @@
 <script>
 	window.onload = function() {
 
+		$('.rateButton').click(function(evt) {
+			evt.preventDefault();
+			$('.rateButton').removeClass('active');
+			$(this).addClass('active');
+			alert();
+		});
+		
 	};
 </script>
 
@@ -40,7 +47,18 @@
 
 	<div id="strategyQuestionForm">
 
-
+		<div class="pagination">
+  <ul>
+   
+    <li class="rateButton" ><a href="#">1</a></li>
+    <li class="rateButton"><a href="#">2</a></li>
+    <li class="rateButton"><a href="#">3</a></li>
+    <li class="rateButton active defaultRateButton"><a href="#">4</a></li>
+    <li class="rateButton" ><a href="#">5</a></li>
+    <li class="rateButton"><a href="#">6</a></li>
+    <li class="rateButton"><a href="#">7</a></li>
+  </ul>
+</div>
 		
 
 

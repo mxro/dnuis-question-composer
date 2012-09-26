@@ -106,16 +106,34 @@
 			</div>
 
 			<div class="control-group">
-				<label class="control-label" for="imageLink">Justification</label>
+				<label class="control-label" for="justification">Justification</label>
 				<div class="controls">
-					<textarea class="justification" rows="7" style="width: 100%;"></textarea>
+					<textarea class="justification" id="justification" rows="7" style="width: 100%;"></textarea>
 					<!-- <input type="text" id="imageLink"
 									class="imageLink input-xxlarge" placeholder="Image Link"> -->
 					<span class="help-block">Provide a short justification why
 						the selected strategy is a suitable strategy for the brand. </span>
 				</div>
 			</div>
-
+			
+			<div class="control-group">
+				<label class="control-label" for="name">Name</label>
+				<div class="controls">
+				<input type="text" id="name" class="name input-xxlarge"
+						placeholder="Your name (optional)" style="width: 100%;">
+						<span class="help-block">Optionally provide your name here, which will be displayed with the questions. </span>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="upi">UPI</label>
+				<div class="controls">
+				<input type="text" id="upi" class="upi input-xxlarge"
+						placeholder="Your UPI (optional, eg mgh032)" style="width: 100%;">
+						<span class="help-block">Optionally provide your UPI (University of Auckland) here, which will be displayed with the questions. </span>
+				</div>
+			</div>
+			
 		</form>
 	</div>
 </div>
